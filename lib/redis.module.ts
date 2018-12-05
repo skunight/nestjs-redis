@@ -13,7 +13,8 @@ export class RedisModule {
       module: RedisModule,
       providers: [
         { provide: REDIS_MODULE_OPTIONS,useValue:options}
-      ]
+      ],
+      exports: [RedisService]
     }
   }
 }
