@@ -1,9 +1,10 @@
-import { DynamicModule, Module } from '@nestjs/common';
+import { DynamicModule, Module, Global } from '@nestjs/common';
 import { RedisModuleOptions } from './redis.interface';
 import { REDIS_MODULE_OPTIONS } from './redis.constants';
 import { RedisService } from './redis.service';
 import { createClient } from './redis-client.provider';
 
+@Global()
 @Module({
   providers:[RedisService],
   exports:[RedisService]
