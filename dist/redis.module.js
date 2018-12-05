@@ -10,13 +10,13 @@ var RedisModule_1;
 const common_1 = require("@nestjs/common");
 const redis_constants_1 = require("./redis.constants");
 const redis_service_1 = require("./redis.service");
-const http_1 = require("http");
+const redis_client_provider_1 = require("./redis-client.provider");
 let RedisModule = RedisModule_1 = class RedisModule {
     static register(options) {
         return {
             module: RedisModule_1,
             providers: [
-                http_1.createClient(),
+                redis_client_provider_1.createClient(),
                 { provide: redis_constants_1.REDIS_MODULE_OPTIONS, useValue: options }
             ],
             exports: [redis_service_1.RedisService]
