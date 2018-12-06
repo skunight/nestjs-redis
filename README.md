@@ -1,7 +1,7 @@
 
-<h1 align="center">Nestjs Redis</h1>
+# Nestjs Redis
 
-<p align="center">Redis component for NestJs.</p>
+Redis component for NestJs.
 
 
 ### Installation
@@ -17,7 +17,7 @@ npm install nestjs-redis --save
 ```
 
 ### Getting Started
-Let's register the config module in `app.module.ts`
+Let's register the RedisModule in `app.module.ts`
 
 ```typescript
 import { Module } from '@nestjs/common';
@@ -37,7 +37,7 @@ import { RedisModule} from 'nestjs-redis'
 
 @Module({
     imports: [
-        RedisModuleforRootAsync({
+        RedisModule.forRootAsync({
             useFactory: (configService: ConfigService) => configService.get('redis'),         // or use async method
             //useFactory: async (configService: ConfigService) => configService.get('redis'),
             inject:[ConfigService]
