@@ -22,6 +22,17 @@ let RedisModule = RedisModule_1 = class RedisModule {
             exports: [redis_service_1.RedisService]
         };
     }
+    static forRootAsync(options) {
+        return {
+            module: RedisModule_1,
+            imports: options.imports,
+            providers: [
+                redis_client_provider_1.createClient(),
+                redis_client_provider_1.createAsyncClientOptions(options),
+            ],
+            exports: [redis_service_1.RedisService]
+        };
+    }
 };
 RedisModule = RedisModule_1 = __decorate([
     common_1.Global(),

@@ -9,3 +9,8 @@ exports.createClient = () => ({
     },
     inject: [redis_constants_1.REDIS_MODULE_OPTIONS]
 });
+exports.createAsyncClientOptions = (options) => ({
+    provide: redis_constants_1.REDIS_MODULE_OPTIONS,
+    useFactory: options.useFactory,
+    inject: options.inject
+});

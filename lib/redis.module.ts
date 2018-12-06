@@ -1,8 +1,8 @@
 import { DynamicModule, Module, Global } from '@nestjs/common';
-import { RedisModuleOptions } from './redis.interface';
+import { RedisModuleOptions, RedisModuleAsyncOptions } from './redis.interface';
 import { REDIS_MODULE_OPTIONS } from './redis.constants';
 import { RedisService } from './redis.service';
-import { createClient } from './redis-client.provider';
+import { createClient, createAsyncClientOptions } from './redis-client.provider';
 
 @Global()
 @Module({
@@ -15,7 +15,19 @@ export class RedisModule {
       module: RedisModule,
       providers: [
         createClient(),
-        { provide: REDIS_MODULE_OPTIONS,useValue:options}
+        { provide: REDIS_MODULE_OPTIONS, useValue:options}
+      ],
+      exports: [RedisService]
+    }
+  }
+
+  static forRootAsync(options: RedisModuleAsyncOptions) : DynamicModule {
+    return {
+      module: RedisModule,
+      imports: options.imports,
+      providers: [
+        createClient(),
+        createAsyncClientOptions(options),
       ],
       exports: [RedisService]
     }

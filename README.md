@@ -30,6 +30,23 @@ import { RedisModule} from 'nestjs-redis'
 })
 export class AppModule {}
 ```
+With Async
+```typescript
+import { Module } from '@nestjs/common';
+import { RedisModule} from 'nestjs-redis'
+
+@Module({
+    imports: [
+        RedisModuleforRootAsync({
+            useFactory: (configService: ConfigService) => configService.get('redis'),         // or use async method
+            //useFactory: async (configService: ConfigService) => configService.get('redis'),
+            inject:[ConfigService]
+        }),
+    ],
+})
+export class AppModule {}
+```
+
 Options
 ```typescript
 interface RedisOptions {
