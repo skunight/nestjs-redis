@@ -20,7 +20,7 @@ npm install nestjs-redis --save
 Let's register the RedisModule in `app.module.ts`
 
 ```typescript
-import { Module } from '@nestjs/common';
+import { Module } from '@nestjs/common'
 import { RedisModule} from 'nestjs-redis'
 
 @Module({
@@ -46,10 +46,61 @@ import { RedisModule} from 'nestjs-redis'
 })
 export class AppModule {}
 ```
+And the config file look like this
+With single client
+```typescript
+export default {
+    host: process.env.REDIS_HOST,
+    port: parseInt(process.env.REDIS_PORT),
+    db: parseInt(process.env.REDIS_DB),
+    password: process.env.REDIS_PASSWORD,
+    keyPrefix: process.env.REDIS_PRIFIX,
+}
+```
+With multi client
+```typescript
+export default [
+    {
+        name:'test1',
+        host: process.env.REDIS_HOST,
+        port: parseInt(process.env.REDIS_PORT),
+        db: parseInt(process.env.REDIS_DB),
+        password: process.env.REDIS_PASSWORD,
+        keyPrefix: process.env.REDIS_PRIFIX,
+    },
+    {
+        name:'test2',
+        host: process.env.REDIS_HOST,
+        port: parseInt(process.env.REDIS_PORT),
+        db: parseInt(process.env.REDIS_DB),
+        password: process.env.REDIS_PASSWORD,
+        keyPrefix: process.env.REDIS_PRIFIX,
+    },
+]
+```
+And use in your service
+```typescript
+import { Injectable } from '@nestjs/common';
+import { RedisService } from 'nestjs-redis';
 
+@Injectable()
+export class TestService {
+  constructor(
+    private readonly redisService: RedisService,
+  ) { }
+  async root(): Promise<boolean> {
+    const client = await this.redisService.getClient('test')
+    return true
+  }
+}
+```
 Options
 ```typescript
 interface RedisOptions {
+    /**
+     * client name. default is a uuid, unique.
+     */
+    name?: string;
     port?: number;
     host?: string;
     /**
