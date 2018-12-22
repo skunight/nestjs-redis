@@ -1,6 +1,6 @@
 {
   "name": "nestjs-redis",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "a nestjs redis module",
   "author": "zzy",
   "license": "MIT",
