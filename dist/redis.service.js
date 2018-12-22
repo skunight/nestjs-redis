@@ -14,13 +14,19 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const redis_constants_1 = require("./redis.constants");
-const Redis = require("ioredis");
+const redis_client_provider_1 = require("./redis-client.provider");
 let RedisService = class RedisService {
-    constructor(client) {
-        this.client = client;
+    constructor(redisClient) {
+        this.redisClient = redisClient;
     }
-    getClient() {
-        return this.client;
+    getClient(name) {
+        if (!name) {
+            name = this.redisClient.defaultKey;
+        }
+        if (!this.redisClient.clients.has(name)) {
+            throw new redis_client_provider_1.RedisClientError(`client ${name} is not exists`);
+        }
+        return this.redisClient.clients.get(name);
     }
 };
 RedisService = __decorate([

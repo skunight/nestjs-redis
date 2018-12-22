@@ -1,14 +1,21 @@
 import { Injectable, Inject } from "@nestjs/common";
 import { REDIS_CLIENT } from './redis.constants';
 import * as Redis from "ioredis";
+import { RedisClient, RedisClientError } from "./redis-client.provider";
 
 @Injectable()
 export class RedisService {
   constructor(
-    @Inject(REDIS_CLIENT) private readonly client: Redis.Redis
-  ) {}
+    @Inject(REDIS_CLIENT) private readonly redisClient: RedisClient
+  ) { }
 
-  getClient() : Redis.Redis {
-    return this.client
+  getClient(name?: string): Redis.Redis {
+    if (!name) {
+      name = this.redisClient.defaultKey
+    } 
+    if (!this.redisClient.clients.has(name)) {
+      throw new RedisClientError(`client ${name} is not exists`)
+    }
+    return this.redisClient.clients.get(name)
   }
 }

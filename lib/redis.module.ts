@@ -10,7 +10,7 @@ import { createClient, createAsyncClientOptions } from './redis-client.provider'
   exports:[RedisService]
 })
 export class RedisModule {
-  static register(options:RedisModuleOptions): DynamicModule {
+  static register(options:RedisModuleOptions|RedisModuleOptions[]): DynamicModule {
     return {
       module: RedisModule,
       providers: [
