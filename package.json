@@ -20,15 +20,15 @@
   },
   "dependencies": {
     "@nestjs/common": "^5.1.0",
+    "@types/ioredis": "^4.0.4",
+    "@types/uuid": "^3.4.4",
     "ioredis": "^4.2.0",
     "rxjs": "^6.2.2",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@nestjs/testing": "^5.5.0",
-    "@types/ioredis": "^4.0.4",
     "@types/node": "^10.7.1",
-    "@types/uuid": "^3.4.4",
     "cz-conventional-changelog": "^2.1.0",
     "jest": "^23.6.0",
     "ts-jest": "^23.10.5",
