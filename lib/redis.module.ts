@@ -1,35 +1,23 @@
-import { DynamicModule, Module, Global } from '@nestjs/common';
-import { RedisModuleOptions, RedisModuleAsyncOptions } from './redis.interface';
-import { REDIS_MODULE_OPTIONS } from './redis.constants';
-import { RedisService } from './redis.service';
-import { createClient, createAsyncClientOptions } from './redis-client.provider';
+import { DynamicModule, Module } from '@nestjs/common';
+import { RedisModuleAsyncOptions, RedisModuleOptions } from './redis.interface';
 
-@Global()
-@Module({
-  providers:[RedisService],
-  exports:[RedisService]
-})
+import { RedisCoreModule } from './redis-core.module';
+
+@Module({})
 export class RedisModule {
-  static register(options:RedisModuleOptions|RedisModuleOptions[]): DynamicModule {
+  static register(
+    options: RedisModuleOptions | RedisModuleOptions[],
+  ): DynamicModule {
     return {
       module: RedisModule,
-      providers: [
-        createClient(),
-        { provide: REDIS_MODULE_OPTIONS, useValue:options}
-      ],
-      exports: [RedisService]
-    }
+      imports: [RedisCoreModule.register(options)],
+    };
   }
 
-  static forRootAsync(options: RedisModuleAsyncOptions) : DynamicModule {
+  static forRootAsync(options: RedisModuleAsyncOptions): DynamicModule {
     return {
       module: RedisModule,
-      imports: options.imports,
-      providers: [
-        createClient(),
-        createAsyncClientOptions(options),
-      ],
-      exports: [RedisService]
-    }
+      imports: [RedisCoreModule.forRootAsync(options)],
+    };
   }
 }
