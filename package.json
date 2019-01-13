@@ -9,7 +9,7 @@
     "url": "https://github.com/kyknow/nestjs-redis"
   },
   "scripts": {
-    "build": "rm -rf dist && tsc -p tsconfig.json",
+    "build": "rimraf dist && tsc -p tsconfig.json",
     "precommit": "lint-staged",
     "prepublish:npm": "yarn run build",
     "publish:npm": "yarn publish --access public",
@@ -23,6 +23,7 @@
     "@types/ioredis": "^4.0.4",
     "@types/uuid": "^3.4.4",
     "ioredis": "^4.2.0",
+    "reflect-metadata": "^0.1.12",
     "rxjs": "^6.2.2",
     "uuid": "^3.3.2"
   },
@@ -31,6 +32,7 @@
     "@types/node": "^10.7.1",
     "cz-conventional-changelog": "^2.1.0",
     "jest": "^23.6.0",
+    "rimraf": "^2.6.3",
     "ts-jest": "^23.10.5",
     "typescript": "^2.4.2"
   },

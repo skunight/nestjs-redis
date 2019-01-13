@@ -1,5 +1,5 @@
-import * as Redis from "ioredis";
-import { RedisModuleOptions, RedisModuleAsyncOptions } from "./redis.interface";
+import * as Redis from 'ioredis';
+import { RedisModuleAsyncOptions, RedisModuleOptions } from './redis.interface';
 export declare class RedisClientError extends Error {
 }
 export interface RedisClient {
