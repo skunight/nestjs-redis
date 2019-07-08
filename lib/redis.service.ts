@@ -19,7 +19,7 @@ export class RedisService {
     return this.redisClient.clients.get(name)
   }
   
-  getClients(): Redis.Redis[] {
+  getClients(): Map<string, Redis.Redis> {
     return this.redisClient.clients;
   }
 }
