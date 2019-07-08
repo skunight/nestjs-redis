@@ -18,4 +18,8 @@ export class RedisService {
     }
     return this.redisClient.clients.get(name)
   }
+  
+  getClients(): Redis.Redis[] {
+    return this.redisClient.clients;
+  }
 }
