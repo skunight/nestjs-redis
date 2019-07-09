@@ -28,6 +28,9 @@ let RedisService = class RedisService {
         }
         return this.redisClient.clients.get(name);
     }
+    getClients() {
+        return this.redisClient.clients;
+    }
 };
 RedisService = __decorate([
     common_1.Injectable(),
