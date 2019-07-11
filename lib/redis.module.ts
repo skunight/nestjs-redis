@@ -11,6 +11,7 @@ export class RedisModule {
     return {
       module: RedisModule,
       imports: [RedisCoreModule.register(options)],
+      exports: [RedisCoreModule.register(options)],
     };
   }
 
@@ -18,6 +19,7 @@ export class RedisModule {
     return {
       module: RedisModule,
       imports: [RedisCoreModule.forRootAsync(options)],
+      exports: [RedisCoreModule.register(options)],
     };
   }
 }
