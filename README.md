@@ -56,17 +56,17 @@ export default {
     password: process.env.REDIS_PASSWORD,
     keyPrefix: process.env.REDIS_PRIFIX,
 }
+Or
+export default {
+    url: 'redis://:authpassword@127.0.0.1:6380/4',
+}
 ```
 With multi client
 ```typescript
 export default [
     {
         name:'test1',
-        host: process.env.REDIS_HOST,
-        port: parseInt(process.env.REDIS_PORT),
-        db: parseInt(process.env.REDIS_DB),
-        password: process.env.REDIS_PASSWORD,
-        keyPrefix: process.env.REDIS_PRIFIX,
+        url: 'redis://:authpassword@127.0.0.1:6380/4',
     },
     {
         name:'test2',
@@ -101,6 +101,7 @@ interface RedisOptions {
      * client name. default is a uuid, unique.
      */
     name?: string;
+    url?: string;
     port?: number;
     host?: string;
     /**

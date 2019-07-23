@@ -22,16 +22,28 @@ export const createClient = () => ({
           if (clients.has(o.name)) {
             throw new RedisClientError(`client ${o.name} is exists`);
           }
-          clients.set(o.name, new Redis(o));
+          if (o.url) {
+            clients.set(o.name, new Redis(o.url));
+          } else {
+            clients.set(o.name, new Redis(o));
+          }
         } else {
           if (clients.has(defaultKey)) {
             throw new RedisClientError('default client is exists');
           }
-          clients.set(defaultKey, new Redis(o));
+          if (o.url) {
+            clients.set(defaultKey, new Redis(o.url));
+          } else {
+            clients.set(defaultKey, new Redis(o));
+          }
         }
       }
     } else {
-      clients.set(defaultKey, new Redis(options));
+      if (options.url) {
+        clients.set(defaultKey, new Redis(options.url));
+      } else {
+        clients.set(defaultKey, new Redis(options));
+      }
     }
     return {
       defaultKey,
