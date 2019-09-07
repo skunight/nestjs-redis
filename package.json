@@ -29,10 +29,12 @@
   },
   "devDependencies": {
     "@nestjs/testing": "6.3.1",
+    "@types/jest": "^24.0.16",
     "@types/node": "^10.7.1",
     "cz-conventional-changelog": "^2.1.0",
     "jest": "^23.6.0",
     "rimraf": "^2.6.3",
+    "supertest": "^4.0.2",
     "ts-jest": "^23.10.5",
     "typescript": "^2.4.2"
   },
@@ -46,5 +48,18 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "./coverage"
   }
 }
