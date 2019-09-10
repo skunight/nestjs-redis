@@ -50,13 +50,13 @@ export class RedisCoreModule implements OnModuleDestroy {
     };
   }
 
-  async onModuleDestroy() {
-    const closeConnection = ({ clients, defaultKey }) => async options => {
+  onModuleDestroy() {
+    const closeConnection = ({ clients, defaultKey }) => options => {
       const name = options.name || defaultKey;
       const client = clients.get(name);
 
       if (client && !options.keepAlive) {
-        await client.disconnect();
+        client.disconnect();
       }
     };
 
@@ -64,9 +64,9 @@ export class RedisCoreModule implements OnModuleDestroy {
     const closeClientConnection = closeConnection(redisClient);
 
     if (Array.isArray(this.options)) {
-      await Promise.all(this.options.map(closeClientConnection));
+      this.options.forEach(closeClientConnection);
     } else {
-      await closeClientConnection(this.options);
+      closeClientConnection(this.options);
     }
   }
 }

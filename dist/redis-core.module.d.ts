@@ -7,5 +7,5 @@ export declare class RedisCoreModule implements OnModuleDestroy {
     constructor(options: RedisModuleOptions | RedisModuleOptions[], moduleRef: ModuleRef);
     static register(options: RedisModuleOptions | RedisModuleOptions[]): DynamicModule;
     static forRootAsync(options: RedisModuleAsyncOptions): DynamicModule;
-    onModuleDestroy(): Promise<void>;
+    onModuleDestroy(): void;
 }
