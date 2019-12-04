@@ -16,7 +16,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "lint": "tslint -p tsconfig.json -c tslint.json"
   },
   "dependencies": {
     "@nestjs/common": "6.3.1",
@@ -32,8 +33,12 @@
     "@types/node": "^10.7.1",
     "cz-conventional-changelog": "^2.1.0",
     "jest": "^23.6.0",
+    "prettier": "^1.19.1",
     "rimraf": "^2.6.3",
     "ts-jest": "^23.10.5",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1",
     "typescript": "^2.4.2"
   },
   "keywords": [
