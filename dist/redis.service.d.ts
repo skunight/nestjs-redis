@@ -5,4 +5,5 @@ export declare class RedisService {
     constructor(redisClient: RedisClient);
     getClient(name?: string): Redis.Redis;
     getClients(): Map<string, Redis.Redis>;
+    onModuleDestroy(): void;
 }

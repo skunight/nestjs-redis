@@ -22,4 +22,12 @@ export class RedisService {
   getClients(): Map<string, Redis.Redis> {
     return this.redisClient.clients;
   }
+
+  // Prevents possible hanging after running tests (like with Jest).
+  // See https://github.com/kyknow/nestjs-redis/issues/37
+  onModuleDestroy() {
+    this.getClients().forEach((client: Redis.Redis) => {
+      client.disconnect();
+    })
+  }
 }

@@ -31,6 +31,11 @@ let RedisService = class RedisService {
     getClients() {
         return this.redisClient.clients;
     }
+    onModuleDestroy() {
+        this.getClients().forEach((client) => {
+            client.disconnect();
+        });
+    }
 };
 RedisService = __decorate([
     common_1.Injectable(),
