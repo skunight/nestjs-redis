@@ -11,40 +11,35 @@ export interface RedisClient {
   size: number;
 }
 
+function getClient(options: RedisModuleOptions, key: string): Redis.Redis {
+  const { errorHandler, url, ...opt } = options;
+
+  const client = url ? new Redis(url) : new Redis(opt);
+  if (errorHandler) {
+    client.on('error', err => errorHandler(err, client));
+  }
+
+  return client;
+}
+
 export const createClient = () => ({
   provide: REDIS_CLIENT,
   useFactory: (options: RedisModuleOptions | RedisModuleOptions[]) => {
     const clients = new Map<string, Redis.Redis>();
     const defaultKey = uuid();
+
     if (Array.isArray(options)) {
       for (const o of options) {
-        if (o.name) {
-          if (clients.has(o.name)) {
-            throw new RedisClientError(`client ${o.name} is exists`);
-          }
-          if (o.url) {
-            clients.set(o.name, new Redis(o.url));
-          } else {
-            clients.set(o.name, new Redis(o));
-          }
-        } else {
-          if (clients.has(defaultKey)) {
-            throw new RedisClientError('default client is exists');
-          }
-          if (o.url) {
-            clients.set(defaultKey, new Redis(o.url));
-          } else {
-            clients.set(defaultKey, new Redis(o));
-          }
+        const key = o.name || defaultKey;
+        if (clients.has(key)) {
+          throw new RedisClientError(`client ${o.name} or default client is exists`);
         }
+        clients.set(key, getClient(o, key));
       }
     } else {
-      if (options.url) {
-        clients.set(defaultKey, new Redis(options.url));
-      } else {
-        clients.set(defaultKey, new Redis(options));
-      }
+      clients.set(defaultKey, getClient(options, defaultKey));
     }
+
     return {
       defaultKey,
       clients,
