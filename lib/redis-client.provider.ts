@@ -1,5 +1,6 @@
 import * as Redis from 'ioredis';
 import * as uuid from 'uuid';
+import { Provider } from '@nestjs/common';
 
 import { REDIS_CLIENT, REDIS_MODULE_OPTIONS } from './redis.constants';
 import { RedisModuleAsyncOptions, RedisModuleOptions } from './redis.interface';
@@ -11,33 +12,33 @@ export interface RedisClient {
   size: number;
 }
 
-function getClient(options: RedisModuleOptions, key: string): Redis.Redis {
-  const { errorHandler, url, ...opt } = options;
-
+async function getClient(options: RedisModuleOptions): Promise<Redis.Redis> {
+  const { onClientReady, url, ...opt } = options;
   const client = url ? new Redis(url) : new Redis(opt);
-  if (errorHandler) {
-    client.on('error', err => errorHandler(err, client));
+  if (onClientReady) {
+    onClientReady(client)
   }
-
   return client;
 }
 
-export const createClient = () => ({
+export const createClient = (): Provider => ({
   provide: REDIS_CLIENT,
-  useFactory: (options: RedisModuleOptions | RedisModuleOptions[]) => {
+  useFactory: async (options: RedisModuleOptions | RedisModuleOptions[]): Promise<RedisClient> => {
     const clients = new Map<string, Redis.Redis>();
     const defaultKey = uuid();
 
     if (Array.isArray(options)) {
-      for (const o of options) {
-        const key = o.name || defaultKey;
-        if (clients.has(key)) {
-          throw new RedisClientError(`client ${o.name} or default client is exists`);
-        }
-        clients.set(key, getClient(o, key));
-      }
+      await Promise.all(
+        options.map(async o => {
+          const key = o.name || defaultKey;
+          if (clients.has(key)) {
+            throw new RedisClientError(`${o.name || 'default'} client is exists`);
+          }
+          clients.set(key, await getClient(o));
+        }),
+      );
     } else {
-      clients.set(defaultKey, getClient(options, defaultKey));
+      clients.set(defaultKey, await getClient(options));
     }
 
     return {
