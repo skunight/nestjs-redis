@@ -48,7 +48,7 @@ exports.createClient = () => ({
             })));
         }
         else {
-            clients.set(defaultKey, yield getClient(options));
+            clients.set(options.name || defaultKey, yield getClient(options));
         }
         return {
             defaultKey,
