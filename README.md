@@ -61,6 +61,15 @@ export default {
     url: 'redis://:authpassword@127.0.0.1:6380/4',
 }
 ```
+With custom error handler
+```typescript
+export default {
+    url: 'redis://:authpassword@127.0.0.1:6380/4',
+    onClientReady: (client) => {
+      client.on('error', (err) => {}
+    )},
+}
+```
 With multi client
 ```typescript
 export default [
