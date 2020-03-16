@@ -38,7 +38,7 @@ export const createClient = (): Provider => ({
         }),
       );
     } else {
-      clients.set(defaultKey, await getClient(options));
+      clients.set(options.name || defaultKey, await getClient(options));
     }
 
     return {
