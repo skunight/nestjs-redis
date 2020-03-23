@@ -25,7 +25,7 @@ export const createClient = (): Provider => ({
   provide: REDIS_CLIENT,
   useFactory: async (options: RedisModuleOptions | RedisModuleOptions[]): Promise<RedisClient> => {
     const clients = new Map<string, Redis.Redis>();
-    const defaultKey = uuid();
+    let defaultKey = uuid();
 
     if (Array.isArray(options)) {
       await Promise.all(
@@ -38,7 +38,10 @@ export const createClient = (): Provider => ({
         }),
       );
     } else {
-      clients.set(options.name || defaultKey, await getClient(options));
+      if (options.name.length !== 0) {
+        defaultKey = options.name;
+      }
+      clients.set(defaultKey, await getClient(options));
     }
 
     return {
