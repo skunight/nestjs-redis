@@ -24,7 +24,7 @@ let RedisService = class RedisService {
             name = this.redisClient.defaultKey;
         }
         if (!this.redisClient.clients.has(name)) {
-            throw new redis_client_provider_1.RedisClientError(`client ${name} is not exists`);
+            throw new redis_client_provider_1.RedisClientError(`client ${name} does not exist`);
         }
         return this.redisClient.clients.get(name);
     }
