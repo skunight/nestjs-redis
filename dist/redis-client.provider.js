@@ -48,7 +48,7 @@ exports.createClient = () => ({
             })));
         }
         else {
-            if (options.name.length !== 0) {
+            if (options.name && options.name.length !== 0) {
                 defaultKey = options.name;
             }
             clients.set(defaultKey, yield getClient(options));
