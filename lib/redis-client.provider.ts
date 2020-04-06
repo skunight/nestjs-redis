@@ -1,20 +1,27 @@
-import * as Redis from 'ioredis';
+import * as IORedis from 'ioredis';
 import * as uuid from 'uuid';
 import { Provider } from '@nestjs/common';
 
-import { REDIS_CLIENT, REDIS_MODULE_OPTIONS } from './redis.constants';
+import { REDIS_MODULE_OPTIONS, REDIS_CLIENTS } from './redis.constants';
 import { RedisModuleAsyncOptions, RedisModuleOptions } from './redis.interface';
 
+export const defaultClientFacory = (options: RedisModuleOptions): RedisClient => {
+  return options.url ? new IORedis(options.url) : new IORedis(options);
+}
+
 export class RedisClientError extends Error {}
-export interface RedisClient {
+
+export interface RedisClients {
   defaultKey: string;
-  clients: Map<string, Redis.Redis>;
+  clients: Map<string, RedisClient>;
   size: number;
 }
 
-async function getClient(options: RedisModuleOptions): Promise<Redis.Redis> {
-  const { onClientReady, url, ...opt } = options;
-  const client = url ? new Redis(url) : new Redis(opt);
+export type RedisClient = any;
+
+async function getClient(options: RedisModuleOptions): Promise<RedisClient> {
+  const { onClientReady, clientFactory } = options;
+  const client = clientFactory ? clientFactory(options) : defaultClientFacory(options);
   if (onClientReady) {
     onClientReady(client)
   }
@@ -22,9 +29,9 @@ async function getClient(options: RedisModuleOptions): Promise<Redis.Redis> {
 }
 
 export const createClient = (): Provider => ({
-  provide: REDIS_CLIENT,
-  useFactory: async (options: RedisModuleOptions | RedisModuleOptions[]): Promise<RedisClient> => {
-    const clients = new Map<string, Redis.Redis>();
+  provide: REDIS_CLIENTS,
+  useFactory: async (options: RedisModuleOptions | RedisModuleOptions[]): Promise<RedisClients> => {
+    const clients = new Map<string, RedisClient>();
     let defaultKey = uuid();
 
     if (Array.isArray(options)) {

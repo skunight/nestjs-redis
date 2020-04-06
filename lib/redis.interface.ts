@@ -1,10 +1,12 @@
 import { ModuleMetadata } from '@nestjs/common/interfaces';
 import { Redis, RedisOptions } from 'ioredis';
+import { RedisClient, RedisClients } from './redis-client.provider';
 
 export interface RedisModuleOptions extends RedisOptions {
   name?: string;
   url?: string;
-  onClientReady?(client: Redis): Promise<void>;
+  onClientReady?(client: RedisClient): Promise<void>;
+  clientFactory?: (options: RedisModuleOptions) => RedisClient;
 }
 
 export interface RedisModuleAsyncOptions extends Pick<ModuleMetadata, 'imports'> {

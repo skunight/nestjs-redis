@@ -11,9 +11,10 @@ import {
   createAsyncClientOptions,
   createClient,
   RedisClient,
+  RedisClients,
 } from './redis-client.provider';
 
-import { REDIS_MODULE_OPTIONS, REDIS_CLIENT } from './redis.constants';
+import { REDIS_MODULE_OPTIONS, REDIS_CLIENTS } from './redis.constants';
 import { RedisService } from './redis.service';
 
 @Global()
@@ -60,7 +61,7 @@ export class RedisCoreModule implements OnModuleDestroy {
       }
     };
 
-    const redisClient = this.moduleRef.get<RedisClient>(REDIS_CLIENT);
+    const redisClient = this.moduleRef.get<RedisClients>(REDIS_CLIENTS);
     const closeClientConnection = closeConnection(redisClient);
 
     if (Array.isArray(this.options)) {
