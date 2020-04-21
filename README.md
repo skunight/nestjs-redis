@@ -38,8 +38,8 @@ import { RedisModule} from 'nestjs-redis'
 @Module({
     imports: [
         RedisModule.forRootAsync({
-            useFactory: (configService: ConfigService) => configService.get('redis'),         // or use async method
-            //useFactory: async (configService: ConfigService) => configService.get('redis'),
+            useFactory: (configService: ConfigService) => ({url: configService.get('redis')}),         // or use async method
+            //useFactory: async (configService: ConfigService) => ({url: configService.get('redis')}),
             inject:[ConfigService]
         }),
     ],
