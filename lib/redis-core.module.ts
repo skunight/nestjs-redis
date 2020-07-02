@@ -11,7 +11,7 @@ import {
   createAsyncClientOptions,
   createClient,
   RedisClient,
-} from './redis-client.provider';
+} from './redis.provider';
 
 import { REDIS_MODULE_OPTIONS, REDIS_CLIENT } from './redis.constants';
 import { RedisService } from './redis.service';

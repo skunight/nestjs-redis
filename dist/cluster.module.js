@@ -5,26 +5,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var RedisModule_1;
+var ClusterModule_1;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RedisModule = void 0;
+exports.ClusterModule = void 0;
 const common_1 = require("@nestjs/common");
-const redis_core_module_1 = require("./redis-core.module");
-let RedisModule = RedisModule_1 = class RedisModule {
+const cluster_core_module_1 = require("./cluster-core.module");
+let ClusterModule = ClusterModule_1 = class ClusterModule {
     static register(options) {
         return {
-            module: RedisModule_1,
-            imports: [redis_core_module_1.RedisCoreModule.register(options)],
+            module: ClusterModule_1,
+            imports: [cluster_core_module_1.ClusterCoreModule.register(options)],
         };
     }
     static forRootAsync(options) {
         return {
-            module: RedisModule_1,
-            imports: [redis_core_module_1.RedisCoreModule.forRootAsync(options)],
+            module: ClusterModule_1,
+            imports: [cluster_core_module_1.ClusterCoreModule.forRootAsync(options)],
         };
     }
 };
-RedisModule = RedisModule_1 = __decorate([
+ClusterModule = ClusterModule_1 = __decorate([
     common_1.Module({})
-], RedisModule);
-exports.RedisModule = RedisModule;
+], ClusterModule);
+exports.ClusterModule = ClusterModule;
