@@ -1,6 +1,6 @@
 import { DynamicModule } from '@nestjs/common';
-import { ClusterModuleAsyncOptions, ClusterModuleOptions } from './cluster.interface';
-export declare class ClusterModule {
-    static register(options: ClusterModuleOptions | ClusterModuleOptions[]): DynamicModule;
-    static forRootAsync(options: ClusterModuleAsyncOptions): DynamicModule;
+import { RedisClusterModuleAsyncOptions, RedisClusterModuleOptions } from './cluster.interface';
+export declare class RedisClusterModule {
+    static register(options: RedisClusterModuleOptions | RedisClusterModuleOptions[]): DynamicModule;
+    static forRootAsync(options: RedisClusterModuleAsyncOptions): DynamicModule;
 }

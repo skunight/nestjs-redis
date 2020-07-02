@@ -63,10 +63,10 @@ exports.createCluster = () => ({
             size: clusters.size,
         };
     }),
-    inject: [cluster_constants_1.CLUSTER_MODULE_OPTIONS],
+    inject: [cluster_constants_1.REDIS_CLUSTER_MODULE_OPTIONS],
 });
 exports.createAsyncClusterOptions = (options) => ({
-    provide: cluster_constants_1.CLUSTER_MODULE_OPTIONS,
+    provide: cluster_constants_1.REDIS_CLUSTER_MODULE_OPTIONS,
     useFactory: options.useFactory,
     inject: options.inject,
 });

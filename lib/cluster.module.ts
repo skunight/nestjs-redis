@@ -1,25 +1,25 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import {
-  ClusterModuleAsyncOptions,
-  ClusterModuleOptions,
+  RedisClusterModuleAsyncOptions,
+  RedisClusterModuleOptions,
 } from './cluster.interface';
 
 import { ClusterCoreModule } from './cluster-core.module';
 
 @Module({})
-export class ClusterModule {
+export class RedisClusterModule {
   static register(
-    options: ClusterModuleOptions | ClusterModuleOptions[],
+    options: RedisClusterModuleOptions | RedisClusterModuleOptions[],
   ): DynamicModule {
     return {
-      module: ClusterModule,
+      module: RedisClusterModule,
       imports: [ClusterCoreModule.register(options)],
     };
   }
 
-  static forRootAsync(options: ClusterModuleAsyncOptions): DynamicModule {
+  static forRootAsync(options: RedisClusterModuleAsyncOptions): DynamicModule {
     return {
-      module: ClusterModule,
+      module: RedisClusterModule,
       imports: [ClusterCoreModule.forRootAsync(options)],
     };
   }

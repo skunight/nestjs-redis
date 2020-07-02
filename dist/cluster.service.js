@@ -12,11 +12,11 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ClusterService = void 0;
+exports.RedisClusterService = void 0;
 const common_1 = require("@nestjs/common");
 const cluster_constants_1 = require("./cluster.constants");
 const cluster_provider_1 = require("./cluster.provider");
-let ClusterService = class ClusterService {
+let RedisClusterService = class RedisClusterService {
     constructor(provider) {
         this.provider = provider;
     }
@@ -33,9 +33,9 @@ let ClusterService = class ClusterService {
         return this.provider.clusters;
     }
 };
-ClusterService = __decorate([
+RedisClusterService = __decorate([
     common_1.Injectable(),
     __param(0, common_1.Inject(cluster_constants_1.REDIS_CLUSTER)),
     __metadata("design:paramtypes", [Object])
-], ClusterService);
-exports.ClusterService = ClusterService;
+], RedisClusterService);
+exports.RedisClusterService = RedisClusterService;

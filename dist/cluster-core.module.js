@@ -29,9 +29,9 @@ let ClusterCoreModule = ClusterCoreModule_1 = class ClusterCoreModule {
             module: ClusterCoreModule_1,
             providers: [
                 cluster_provider_1.createCluster(),
-                { provide: cluster_constants_1.CLUSTER_MODULE_OPTIONS, useValue: options },
+                { provide: cluster_constants_1.REDIS_CLUSTER_MODULE_OPTIONS, useValue: options },
             ],
-            exports: [cluster_service_1.ClusterService],
+            exports: [cluster_service_1.RedisClusterService],
         };
     }
     static forRootAsync(options) {
@@ -39,7 +39,7 @@ let ClusterCoreModule = ClusterCoreModule_1 = class ClusterCoreModule {
             module: ClusterCoreModule_1,
             imports: options.imports,
             providers: [cluster_provider_1.createCluster(), cluster_provider_1.createAsyncClusterOptions(options)],
-            exports: [cluster_service_1.ClusterService],
+            exports: [cluster_service_1.RedisClusterService],
         };
     }
     onModuleDestroy() {
@@ -63,10 +63,10 @@ let ClusterCoreModule = ClusterCoreModule_1 = class ClusterCoreModule {
 ClusterCoreModule = ClusterCoreModule_1 = __decorate([
     common_1.Global(),
     common_1.Module({
-        providers: [cluster_service_1.ClusterService],
-        exports: [cluster_service_1.ClusterService],
+        providers: [cluster_service_1.RedisClusterService],
+        exports: [cluster_service_1.RedisClusterService],
     }),
-    __param(0, common_1.Inject(cluster_constants_1.CLUSTER_MODULE_OPTIONS)),
+    __param(0, common_1.Inject(cluster_constants_1.REDIS_CLUSTER_MODULE_OPTIONS)),
     __metadata("design:paramtypes", [Object, core_1.ModuleRef])
 ], ClusterCoreModule);
 exports.ClusterCoreModule = ClusterCoreModule;

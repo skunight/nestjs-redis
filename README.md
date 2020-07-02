@@ -220,14 +220,14 @@ interface RedisOptions {
 
 ##### ClusterModule
 
-Let's register the ClusterModule in `app.module.ts`
+Let's register the RedisClusterModule in `app.module.ts`
 
 ```typescript
 import { Module } from '@nestjs/common';
-import { ClusterModule } from 'nestjs-redis-cluster';
+import { RedisClusterModule } from 'nestjs-redis-cluster';
 
 @Module({
-  imports: [ClusterModule.register(options)],
+  imports: [RedisClusterModule.register(options)],
 })
 export class AppModule {}
 ```
@@ -240,7 +240,7 @@ import { ClusterModule } from 'nestjs-redis-cluster';
 
 @Module({
   imports: [
-    ClusterModule.forRootAsync({
+    RedisClusterModule.forRootAsync({
       useFactory: (configService: ConfigService) =>
         configService.get('cluster'),
       // or use async method
@@ -252,7 +252,7 @@ import { ClusterModule } from 'nestjs-redis-cluster';
 export class AppModule {}
 ```
 
-Config looks like this for ClusterModule
+Config looks like this for RedisClusterModule
 
 ```typescript
 export default {
@@ -289,8 +289,8 @@ export default {
       url: 'redis://:authpassword@127.0.0.1:6380/4',
     },
   ],
-  onClusterReady: client => {
-    client.on('error', err => {});
+  onClusterReady: cluster => {
+    cluster.on('error', err => {});
   },
 };
 ```
@@ -327,13 +327,13 @@ And use in your service
 
 ```typescript
 import { Injectable } from '@nestjs/common';
-import { ClusterService } from 'nestjs-redis-cluster';
+import { RedisClusterService } from 'nestjs-redis-cluster';
 
 @Injectable()
 export class TestService {
-  constructor(private readonly redisService: RedisService) {}
+  constructor(private readonly redisService: RedisClusterService) {}
   async root(): Promise<boolean> {
-    const client = await this.redisService.getClient('test');
+    const client = await this.redisService.getCluster('test');
     return true;
   }
 }
@@ -345,7 +345,7 @@ Almost all the options are passed to ioredis/cluster (https://github.com/luin/io
 The only additional options are `name`, `nodes`, and `onClusterReady`.
 
 ```typescript
-interface ClusterOptions {
+interface RedisClusterOptions {
   /**
    * client name. default is a uuid, unique.
    */

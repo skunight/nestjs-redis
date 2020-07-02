@@ -8,49 +8,54 @@ import {
 import { ModuleRef } from '@nestjs/core';
 import { Redis } from 'ioredis';
 import {
-  ClusterModuleAsyncOptions,
-  ClusterModuleOptions,
+  RedisClusterModuleAsyncOptions,
+  RedisClusterModuleOptions,
 } from './cluster.interface';
 import {
   createAsyncClusterOptions,
   createCluster,
-  ClusterProvider,
+  RedisClusterProvider,
 } from './cluster.provider';
 
-import { CLUSTER_MODULE_OPTIONS, REDIS_CLUSTER } from './cluster.constants';
-import { ClusterService } from './cluster.service';
+import {
+  REDIS_CLUSTER_MODULE_OPTIONS,
+  REDIS_CLUSTER,
+} from './cluster.constants';
+import { RedisClusterService } from './cluster.service';
 
 @Global()
 @Module({
-  providers: [ClusterService],
-  exports: [ClusterService],
+  providers: [RedisClusterService],
+  exports: [RedisClusterService],
 })
 export class ClusterCoreModule implements OnModuleDestroy {
   constructor(
-    @Inject(CLUSTER_MODULE_OPTIONS)
-    private readonly options: ClusterModuleOptions | ClusterModuleOptions[],
+    @Inject(REDIS_CLUSTER_MODULE_OPTIONS)
+    private readonly options:
+      | RedisClusterModuleOptions
+      | RedisClusterModuleOptions[],
     private readonly moduleRef: ModuleRef,
   ) {}
 
   static register(
-    options: ClusterModuleOptions | ClusterModuleOptions[],
+    options: RedisClusterModuleOptions | RedisClusterModuleOptions[],
   ): DynamicModule {
     return {
       module: ClusterCoreModule,
       providers: [
         createCluster(),
-        { provide: CLUSTER_MODULE_OPTIONS, useValue: options },
+        { provide: REDIS_CLUSTER_MODULE_OPTIONS, useValue: options },
       ],
-      exports: [ClusterService],
+      exports: [RedisClusterService],
     };
   }
 
-  static forRootAsync(options: ClusterModuleAsyncOptions): DynamicModule {
+  static forRootAsync(options: RedisClusterModuleAsyncOptions): DynamicModule {
     return {
       module: ClusterCoreModule,
       imports: options.imports,
       providers: [createCluster(), createAsyncClusterOptions(options)],
-      exports: [ClusterService],
+      exports: [RedisClusterService],
     };
   }
 
@@ -58,7 +63,7 @@ export class ClusterCoreModule implements OnModuleDestroy {
     const closeConnection = ({
       clusters,
       defaultKey,
-    }: ClusterProvider) => options => {
+    }: RedisClusterProvider) => options => {
       const name = options.name || defaultKey;
       const cluster: Redis = clusters.get(name);
 
@@ -67,7 +72,7 @@ export class ClusterCoreModule implements OnModuleDestroy {
       }
     };
 
-    const provider = this.moduleRef.get<ClusterProvider>(REDIS_CLUSTER);
+    const provider = this.moduleRef.get<RedisClusterProvider>(REDIS_CLUSTER);
     const closeClusterConnection = closeConnection(provider);
 
     if (Array.isArray(this.options)) {

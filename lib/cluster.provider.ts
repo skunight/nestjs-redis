@@ -2,20 +2,23 @@ import { Cluster, Redis } from 'ioredis';
 import * as uuid from 'uuid';
 import { Provider } from '@nestjs/common';
 
-import { REDIS_CLUSTER, CLUSTER_MODULE_OPTIONS } from './cluster.constants';
 import {
-  ClusterModuleAsyncOptions,
-  ClusterModuleOptions,
+  REDIS_CLUSTER,
+  REDIS_CLUSTER_MODULE_OPTIONS,
+} from './cluster.constants';
+import {
+  RedisClusterModuleAsyncOptions,
+  RedisClusterModuleOptions,
 } from './cluster.interface';
 
 export class RedisClusterError extends Error {}
-export interface ClusterProvider {
+export interface RedisClusterProvider {
   defaultKey: string;
   clusters: Map<string, Redis>;
   size: number;
 }
 
-async function getCluster(options: ClusterModuleOptions): Promise<Redis> {
+async function getCluster(options: RedisClusterModuleOptions): Promise<Redis> {
   const { onClusterReady, nodes, ...opt } = options;
   const cluster: Redis = new Cluster(nodes, opt);
 
@@ -29,8 +32,8 @@ async function getCluster(options: ClusterModuleOptions): Promise<Redis> {
 export const createCluster = (): Provider => ({
   provide: REDIS_CLUSTER,
   useFactory: async (
-    options: ClusterModuleOptions | ClusterModuleOptions[],
-  ): Promise<ClusterProvider> => {
+    options: RedisClusterModuleOptions | RedisClusterModuleOptions[],
+  ): Promise<RedisClusterProvider> => {
     const clusters: Map<string, Redis> = new Map<string, Redis>();
     let defaultKey = uuid();
 
@@ -59,13 +62,13 @@ export const createCluster = (): Provider => ({
       size: clusters.size,
     };
   },
-  inject: [CLUSTER_MODULE_OPTIONS],
+  inject: [REDIS_CLUSTER_MODULE_OPTIONS],
 });
 
 export const createAsyncClusterOptions = (
-  options: ClusterModuleAsyncOptions,
+  options: RedisClusterModuleAsyncOptions,
 ) => ({
-  provide: CLUSTER_MODULE_OPTIONS,
+  provide: REDIS_CLUSTER_MODULE_OPTIONS,
   useFactory: options.useFactory,
   inject: options.inject,
 });
