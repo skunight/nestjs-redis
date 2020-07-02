@@ -6,7 +6,7 @@ import {
   OnModuleDestroy,
 } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
-import { Cluster } from 'ioredis';
+import { Redis } from 'ioredis';
 import {
   ClusterModuleAsyncOptions,
   ClusterModuleOptions,
@@ -60,7 +60,7 @@ export class ClusterCoreModule implements OnModuleDestroy {
       defaultKey,
     }: ClusterProvider) => options => {
       const name = options.name || defaultKey;
-      const cluster: Cluster = clusters.get(name);
+      const cluster: Redis = clusters.get(name);
 
       if (cluster && !options.keepAlive) {
         cluster.disconnect();

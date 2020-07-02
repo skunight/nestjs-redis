@@ -1,8 +1,8 @@
-import { Cluster } from 'ioredis';
+import { Redis } from 'ioredis';
 import { ClusterProvider } from './cluster.provider';
 export declare class ClusterService {
     private readonly provider;
     constructor(provider: ClusterProvider);
-    getCluster(name?: string): Cluster;
-    getClusters(): Map<string, Cluster>;
+    getCluster(name?: string): Redis;
+    getClusters(): Map<string, Redis>;
 }

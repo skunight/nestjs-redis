@@ -1,10 +1,10 @@
 import { ModuleMetadata } from '@nestjs/common/interfaces';
-import { Cluster, ClusterOptions } from 'ioredis';
+import { Redis, ClusterOptions } from 'ioredis';
 
 export interface ClusterModuleOptions extends ClusterOptions {
   name?: string;
   nodes: (string | number | object)[];
-  onClusterReady?(cluster: Cluster): Promise<void>;
+  onClusterReady?(cluster: Redis): Promise<void>;
 }
 
 export interface ClusterModuleAsyncOptions

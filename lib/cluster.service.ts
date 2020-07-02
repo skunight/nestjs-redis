@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { REDIS_CLUSTER } from './cluster.constants';
-import { Cluster } from 'ioredis';
+import { Redis } from 'ioredis';
 import { ClusterProvider, RedisClusterError } from './cluster.provider';
 
 @Injectable()
@@ -9,7 +9,7 @@ export class ClusterService {
     @Inject(REDIS_CLUSTER) private readonly provider: ClusterProvider,
   ) {}
 
-  getCluster(name?: string): Cluster {
+  getCluster(name?: string): Redis {
     if (!name) {
       name = this.provider.defaultKey;
     }
@@ -20,7 +20,7 @@ export class ClusterService {
     return this.provider.clusters.get(name);
   }
 
-  getClusters(): Map<string, Cluster> {
+  getClusters(): Map<string, Redis> {
     return this.provider.clusters;
   }
 }

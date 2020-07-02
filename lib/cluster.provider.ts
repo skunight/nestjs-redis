@@ -1,4 +1,4 @@
-import { Cluster } from 'ioredis';
+import { Cluster, Redis } from 'ioredis';
 import * as uuid from 'uuid';
 import { Provider } from '@nestjs/common';
 
@@ -11,13 +11,13 @@ import {
 export class RedisClusterError extends Error {}
 export interface ClusterProvider {
   defaultKey: string;
-  clusters: Map<string, Cluster>;
+  clusters: Map<string, Redis>;
   size: number;
 }
 
-async function getCluster(options: ClusterModuleOptions): Promise<Cluster> {
+async function getCluster(options: ClusterModuleOptions): Promise<Redis> {
   const { onClusterReady, nodes, ...opt } = options;
-  const cluster: Cluster = (new Cluster(nodes, opt) as unknown) as Cluster;
+  const cluster: Redis = new Cluster(nodes, opt);
 
   if (onClusterReady) {
     onClusterReady(cluster);
@@ -31,7 +31,7 @@ export const createCluster = (): Provider => ({
   useFactory: async (
     options: ClusterModuleOptions | ClusterModuleOptions[],
   ): Promise<ClusterProvider> => {
-    const clusters: Map<string, Cluster> = new Map<string, Cluster>();
+    const clusters: Map<string, Redis> = new Map<string, Redis>();
     let defaultKey = uuid();
 
     if (Array.isArray(options)) {
