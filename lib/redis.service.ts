@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { REDIS_CLIENT } from './redis.constants';
 import * as Redis from 'ioredis';
-import { RedisClient, RedisClientError } from './redis-client.provider';
+import { RedisClient, RedisClientError } from './redis.provider';
 
 @Injectable()
 export class RedisService {

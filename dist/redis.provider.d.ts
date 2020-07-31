@@ -8,7 +8,7 @@ export interface RedisClient {
     clients: Map<string, Redis.Redis>;
     size: number;
 }
-export declare const createClient: () => Provider<any>;
+export declare const createClient: () => Provider;
 export declare const createAsyncClientOptions: (options: RedisModuleAsyncOptions) => {
     provide: symbol;
     useFactory: (...args: any[]) => RedisModuleOptions | Promise<RedisModuleOptions> | RedisModuleOptions[] | Promise<RedisModuleOptions[]>;
