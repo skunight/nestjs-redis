@@ -33,11 +33,13 @@ export class AppModule {}
 With Async
 ```typescript
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { RedisModule} from 'nestjs-redis'
 
 @Module({
     imports: [
         RedisModule.forRootAsync({
+            imports: [ConfigModule],
             useFactory: (configService: ConfigService) => configService.get('redis'),         // or use async method
             //useFactory: async (configService: ConfigService) => configService.get('redis'),
             inject:[ConfigService]

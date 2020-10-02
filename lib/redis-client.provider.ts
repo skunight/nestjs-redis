@@ -1,5 +1,5 @@
 import * as Redis from 'ioredis';
-import * as uuid from 'uuid';
+import { v4 as uuid } from 'uuid';
 import { Provider } from '@nestjs/common';
 
 import { REDIS_CLIENT, REDIS_MODULE_OPTIONS } from './redis.constants';
