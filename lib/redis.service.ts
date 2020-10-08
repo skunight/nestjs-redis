@@ -9,14 +9,14 @@ export class RedisService {
     @Inject(REDIS_CLIENT) private readonly redisClient: RedisClient,
   ) {}
 
-  getClient(name?: string): Redis.Redis {
-    if (!name) {
-      name = this.redisClient.defaultKey;
+  getClient(clientName?: string): Redis.Redis {
+    if (!clientName) {
+      clientName = this.redisClient.defaultKey;
     }
-    if (!this.redisClient.clients.has(name)) {
-      throw new RedisClientError(`client ${name} does not exist`);
+    if (!this.redisClient.clients.has(clientName)) {
+      throw new RedisClientError(`client ${clientName} does not exist`);
     }
-    return this.redisClient.clients.get(name);
+    return this.redisClient.clients.get(clientName);
   }
 
   getClients(): Map<string, Redis.Redis> {

@@ -74,11 +74,11 @@ With multi client
 ```typescript
 export default [
     {
-        name:'test1',
+        clientName:'test1',
         url: 'redis://:authpassword@127.0.0.1:6380/4',
     },
     {
-        name:'test2',
+        clientName:'test2',
         host: process.env.REDIS_HOST,
         port: parseInt(process.env.REDIS_PORT),
         db: parseInt(process.env.REDIS_DB),
@@ -109,7 +109,7 @@ interface RedisOptions {
     /**
      * client name. default is a uuid, unique.
      */
-    name?: string;
+    clientName?: string;
     url?: string;
     port?: number;
     host?: string;
