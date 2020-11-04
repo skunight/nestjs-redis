@@ -7,13 +7,13 @@ Redis component for NestJs.
 **Yarn**
 
 ```bash
-yarn add nest-redis
+yarn add nestjs-redis
 ```
 
 **NPM**
 
 ```bash
-npm install nest-redis --save
+npm install nestjs-redis --save
 ```
 
 ### Getting Started
@@ -22,7 +22,7 @@ Let's register the RedisModule in `app.module.ts`
 
 ```typescript
 import { Module } from '@nestjs/common';
-import { RedisModule } from 'nest-redis';
+import { RedisModule } from 'nestjs-redis';
 
 @Module({
   imports: [RedisModule.register(options)],
@@ -34,7 +34,7 @@ With Async
 
 ```typescript
 import { Module } from '@nestjs/common';
-import { RedisModule } from 'nest-redis';
+import { RedisModule } from 'nestjs-redis';
 
 @Module({
   imports: [
@@ -99,7 +99,7 @@ And use in your service
 
 ```typescript
 import { Injectable } from '@nestjs/common';
-import { RedisService } from 'nest-redis';
+import { RedisService } from 'nestjs-redis';
 
 @Injectable()
 export class TestService {
