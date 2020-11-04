@@ -1,8 +1,8 @@
 {
-  "name": "nestjs-ioredis",
-  "version": "1.3.1",
-  "description": "a NestJS ioredis module",
-  "author": "zzy",
+  "name": "nest-redis",
+  "version": "1.3.2",
+  "description": "a NestJS ioRedis module",
+  "author": "Stanislav V Vyaliy",
   "license": "MIT",
   "repository": {
     "type": "git",
