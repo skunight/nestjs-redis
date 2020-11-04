@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6,25 +5,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var RedisModule_1;
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.RedisModule = void 0;
-const common_1 = require("@nestjs/common");
-const redis_core_module_1 = require("./redis-core.module");
+import { Module } from '@nestjs/common';
+import { RedisCoreModule } from './redis-core.module';
 let RedisModule = RedisModule_1 = class RedisModule {
     static register(options) {
         return {
             module: RedisModule_1,
-            imports: [redis_core_module_1.RedisCoreModule.register(options)],
+            imports: [RedisCoreModule.register(options)],
         };
     }
     static forRootAsync(options) {
         return {
             module: RedisModule_1,
-            imports: [redis_core_module_1.RedisCoreModule.forRootAsync(options)],
+            imports: [RedisCoreModule.forRootAsync(options)],
         };
     }
 };
 RedisModule = RedisModule_1 = __decorate([
-    common_1.Module({})
+    Module({})
 ], RedisModule);
-exports.RedisModule = RedisModule;
+export { RedisModule };

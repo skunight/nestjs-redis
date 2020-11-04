@@ -1,6 +1,6 @@
 {
   "name": "nest-redis",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "a NestJS ioRedis module",
   "author": "Stanislav V Vyaliy",
   "license": "MIT",
@@ -22,16 +22,14 @@
   "dependencies": {
     "@nestjs/common": "^7",
     "@nestjs/core": "^7",
-    "@types/ioredis": "*",
-    "@types/uuid": "*",
-    "ioredis": "^4",
-    "reflect-metadata": "*",
-    "rxjs": "^6",
+    "ioredis": "*",
     "uuid": "^8"
   },
   "devDependencies": {
     "@nestjs/testing": "^7",
     "@types/node": "*",
+    "@types/ioredis": "*",
+    "@types/uuid": "*",
     "@typescript-eslint/eslint-plugin": "^4",
     "@typescript-eslint/parser": "^4",
     "cz-conventional-changelog": "^3",
@@ -41,7 +39,9 @@
     "eslint-plugin-prettier": "^3",
     "jest": "^26",
     "prettier": "^2",
+    "reflect-metadata": "*",
     "rimraf": "*",
+    "rxjs": "^6",
     "ts-jest": "^26",
     "typescript": "^4"
   },
