@@ -1,4 +1,4 @@
-import * as Redis from 'ioredis';
+import Redis from 'ioredis';
 import { v4 as uuidv4 } from 'uuid';
 import { Provider } from '@nestjs/common';
 

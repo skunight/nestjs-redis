@@ -1,15 +1,16 @@
 {
   "compilerOptions": {
-    "module": "esnext",
-    "target": "es2018",
+    "module": "commonjs",
+    "target": "esnext",
     "declaration": true,
     "moduleResolution": "node",
     "noImplicitAny": false,
     "removeComments": true,
     "noLib": false,
+    "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": false,
+    "sourceMap": true,
     "outDir": "./dist",
     "rootDir": "./lib",
     "skipLibCheck": true
