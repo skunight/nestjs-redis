@@ -1,6 +1,6 @@
 {
   "name": "nestjs-redis",
-  "version": "1.2.7",
+  "version": "1.3.0",
   "description": "a nestjs redis module",
   "author": "zzy",
   "license": "MIT",
@@ -17,30 +17,33 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "lint": "tslint -p tsconfig.json -c tslint.json"
+    "lint": "eslint -c .eslintrc.js"
   },
   "dependencies": {
-    "@nestjs/common": "6.3.1",
-    "@nestjs/core": "^6.6.7",
-    "@types/ioredis": "^4.0.4",
-    "@types/uuid": "^3.4.4",
-    "ioredis": "^4.2.0",
-    "reflect-metadata": "^0.1.12",
-    "rxjs": "^6.2.2",
-    "uuid": "^3.3.2"
+    "@nestjs/common": "^7",
+    "@nestjs/core": "^7",
+    "@types/ioredis": "*",
+    "@types/uuid": "*",
+    "ioredis": "^4",
+    "reflect-metadata": "*",
+    "rxjs": "^6",
+    "uuid": "^8"
   },
   "devDependencies": {
-    "@nestjs/testing": "6.3.1",
-    "@types/node": "^10.7.1",
-    "cz-conventional-changelog": "^2.1.0",
-    "jest": "^23.6.0",
-    "prettier": "^1.19.1",
-    "rimraf": "^2.6.3",
-    "ts-jest": "^23.10.5",
-    "tslint": "^5.20.1",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-plugin-prettier": "^2.0.1",
-    "typescript": "^2.4.2"
+    "@nestjs/testing": "^7",
+    "@types/node": "*",
+    "@typescript-eslint/eslint-plugin": "^4",
+    "@typescript-eslint/parser": "^4",
+    "cz-conventional-changelog": "^3",
+    "eslint": "*",
+    "eslint-config-prettier": "^6",
+    "eslint-plugin-jest": "^24",
+    "eslint-plugin-prettier": "^3",
+    "jest": "^26",
+    "prettier": "^2",
+    "rimraf": "*",
+    "ts-jest": "^26",
+    "typescript": "^4"
   },
   "keywords": [
     "nestjs",

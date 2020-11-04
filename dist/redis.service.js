@@ -12,6 +12,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.RedisService = void 0;
 const common_1 = require("@nestjs/common");
 const redis_constants_1 = require("./redis.constants");
 const redis_client_provider_1 = require("./redis-client.provider");

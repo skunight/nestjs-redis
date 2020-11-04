@@ -11,8 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var RedisCoreModule_1;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RedisCoreModule = void 0;
 const common_1 = require("@nestjs/common");
 const core_1 = require("@nestjs/core");
 const redis_client_provider_1 = require("./redis-client.provider");
