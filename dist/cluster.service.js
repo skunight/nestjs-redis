@@ -20,14 +20,14 @@ let RedisClusterService = class RedisClusterService {
     constructor(provider) {
         this.provider = provider;
     }
-    getCluster(name) {
-        if (!name) {
-            name = this.provider.defaultKey;
+    getCluster(clientName) {
+        if (!clientName) {
+            clientName = this.provider.defaultKey;
         }
-        if (!this.provider.clusters.has(name)) {
-            throw new cluster_provider_1.RedisClusterError(`cluster ${name} does not exist`);
+        if (!this.provider.clusters.has(clientName)) {
+            throw new cluster_provider_1.RedisClusterError(`cluster ${clientName} does not exist`);
         }
-        return this.provider.clusters.get(name);
+        return this.provider.clusters.get(clientName);
     }
     getClusters() {
         return this.provider.clusters;

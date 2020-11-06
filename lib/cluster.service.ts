@@ -9,15 +9,15 @@ export class RedisClusterService {
     @Inject(REDIS_CLUSTER) private readonly provider: RedisClusterProvider,
   ) {}
 
-  getCluster(name?: string): Cluster {
-    if (!name) {
-      name = this.provider.defaultKey;
+  getCluster(clientName?: string): Cluster {
+    if (!clientName) {
+      clientName = this.provider.defaultKey;
     }
 
-    if (!this.provider.clusters.has(name)) {
-      throw new RedisClusterError(`cluster ${name} does not exist`);
+    if (!this.provider.clusters.has(clientName)) {
+      throw new RedisClusterError(`cluster ${clientName} does not exist`);
     }
-    return this.provider.clusters.get(name);
+    return this.provider.clusters.get(clientName);
   }
 
   getClusters(): Map<string, Cluster> {

@@ -1,6 +1,6 @@
 import { DynamicModule, OnModuleDestroy } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
-import { RedisClusterModuleAsyncOptions, RedisClusterModuleOptions } from './cluster.interface';
+import type { RedisClusterModuleAsyncOptions, RedisClusterModuleOptions } from './cluster.interface';
 export declare class ClusterCoreModule implements OnModuleDestroy {
     private readonly options;
     private readonly moduleRef;

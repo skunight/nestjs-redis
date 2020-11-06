@@ -1,6 +1,6 @@
-import { Cluster } from 'ioredis';
 import { Provider } from '@nestjs/common';
-import { RedisClusterModuleAsyncOptions, RedisClusterModuleOptions } from './cluster.interface';
+import { Cluster } from 'ioredis';
+import type { RedisClusterModuleAsyncOptions, RedisClusterModuleOptions } from './cluster.interface';
 export declare class RedisClusterError extends Error {
 }
 export interface RedisClusterProvider {

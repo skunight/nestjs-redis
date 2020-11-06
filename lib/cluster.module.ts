@@ -1,9 +1,9 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import {
+
+import type {
   RedisClusterModuleAsyncOptions,
   RedisClusterModuleOptions,
 } from './cluster.interface';
-
 import { ClusterCoreModule } from './cluster-core.module';
 
 @Module({})

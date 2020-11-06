@@ -1,15 +1,15 @@
-import { Cluster, Redis } from 'ioredis';
 import { v4 as uuid } from 'uuid';
 import { Provider } from '@nestjs/common';
+import { Cluster } from 'ioredis';
 
+import type {
+  RedisClusterModuleAsyncOptions,
+  RedisClusterModuleOptions,
+} from './cluster.interface';
 import {
   REDIS_CLUSTER,
   REDIS_CLUSTER_MODULE_OPTIONS,
 } from './cluster.constants';
-import {
-  RedisClusterModuleAsyncOptions,
-  RedisClusterModuleOptions,
-} from './cluster.interface';
 
 export class RedisClusterError extends Error {}
 export interface RedisClusterProvider {
@@ -40,18 +40,18 @@ export const createCluster = (): Provider => ({
     if (Array.isArray(options)) {
       await Promise.all(
         options.map(async o => {
-          const key: string = o.name || defaultKey;
+          const key: string = o.clientName || defaultKey;
           if (clusters.has(key)) {
             throw new RedisClusterError(
-              `${o.name || 'default'} cluster already exists`,
+              `${o.clientName || 'default'} cluster already exists`,
             );
           }
           clusters.set(key, await getCluster(o));
         }),
       );
     } else {
-      if (options.name && options.name.length !== 0) {
-        defaultKey = options.name;
+      if (options.clientName && options.clientName.length !== 0) {
+        defaultKey = options.clientName;
       }
       clusters.set(defaultKey, await getCluster(options));
     }

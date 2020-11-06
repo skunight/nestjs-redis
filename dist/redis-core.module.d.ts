@@ -1,6 +1,6 @@
+import type { RedisModuleAsyncOptions, RedisModuleOptions } from './redis.interface';
 import { DynamicModule, OnModuleDestroy } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
-import { RedisModuleAsyncOptions, RedisModuleOptions } from './redis.interface';
 export declare class RedisCoreModule implements OnModuleDestroy {
     private readonly options;
     private readonly moduleRef;

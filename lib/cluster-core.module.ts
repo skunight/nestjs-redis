@@ -1,3 +1,4 @@
+import type { Cluster } from 'ioredis';
 import {
   DynamicModule,
   Global,
@@ -6,8 +7,8 @@ import {
   OnModuleDestroy,
 } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
-import { Cluster } from 'ioredis';
-import {
+
+import type {
   RedisClusterModuleAsyncOptions,
   RedisClusterModuleOptions,
 } from './cluster.interface';
@@ -16,7 +17,6 @@ import {
   createCluster,
   RedisClusterProvider,
 } from './cluster.provider';
-
 import {
   REDIS_CLUSTER_MODULE_OPTIONS,
   REDIS_CLUSTER,

@@ -16,8 +16,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RedisCoreModule = void 0;
 const common_1 = require("@nestjs/common");
 const core_1 = require("@nestjs/core");
-const redis_provider_1 = require("./redis.provider");
 const redis_constants_1 = require("./redis.constants");
+const redis_provider_1 = require("./redis.provider");
 const redis_service_1 = require("./redis.service");
 let RedisCoreModule = RedisCoreModule_1 = class RedisCoreModule {
     constructor(options, moduleRef) {

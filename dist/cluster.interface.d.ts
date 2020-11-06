@@ -1,7 +1,7 @@
-import { ModuleMetadata } from '@nestjs/common/interfaces';
-import { Cluster, ClusterOptions } from 'ioredis';
+import type { ModuleMetadata } from '@nestjs/common/interfaces';
+import type { Cluster, ClusterOptions } from 'ioredis';
 export interface RedisClusterModuleOptions extends ClusterOptions {
-    name?: string;
+    clientName?: string;
     nodes: (string | number | object)[];
     onClusterReady?(cluster: Cluster): Promise<void>;
 }

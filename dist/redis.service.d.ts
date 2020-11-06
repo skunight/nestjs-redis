@@ -1,4 +1,4 @@
-import { Redis } from 'ioredis';
+import type { Redis } from 'ioredis';
 import { RedisClient } from './redis.provider';
 export declare class RedisService {
     private readonly redisClient;

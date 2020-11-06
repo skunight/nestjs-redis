@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createAsyncClusterOptions = exports.createCluster = exports.RedisClusterError = void 0;
-const ioredis_1 = require("ioredis");
 const uuid_1 = require("uuid");
+const ioredis_1 = require("ioredis");
 const cluster_constants_1 = require("./cluster.constants");
 class RedisClusterError extends Error {
 }
@@ -22,16 +22,16 @@ exports.createCluster = () => ({
         let defaultKey = uuid_1.v4();
         if (Array.isArray(options)) {
             await Promise.all(options.map(async (o) => {
-                const key = o.name || defaultKey;
+                const key = o.clientName || defaultKey;
                 if (clusters.has(key)) {
-                    throw new RedisClusterError(`${o.name || 'default'} cluster already exists`);
+                    throw new RedisClusterError(`${o.clientName || 'default'} cluster already exists`);
                 }
                 clusters.set(key, await getCluster(o));
             }));
         }
         else {
-            if (options.name && options.name.length !== 0) {
-                defaultKey = options.name;
+            if (options.clientName && options.clientName.length !== 0) {
+                defaultKey = options.clientName;
             }
             clusters.set(defaultKey, await getCluster(options));
         }
