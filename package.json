@@ -27,8 +27,8 @@
   },
   "devDependencies": {
     "@nestjs/testing": "^7",
-    "@types/node": "*",
     "@types/ioredis": "*",
+    "@types/node": "*",
     "@types/uuid": "*",
     "@typescript-eslint/eslint-plugin": "^4",
     "@typescript-eslint/parser": "^4",
