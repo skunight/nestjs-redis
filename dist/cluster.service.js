@@ -12,31 +12,30 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RedisService = void 0;
+exports.RedisClusterService = void 0;
 const common_1 = require("@nestjs/common");
-const redis_constants_1 = require("./redis.constants");
-const redis_provider_1 = require("./redis.provider");
-let RedisService = class RedisService {
-    constructor(redisClient) {
-        this.redisClient = redisClient;
+const cluster_constants_1 = require("./cluster.constants");
+const cluster_provider_1 = require("./cluster.provider");
+let RedisClusterService = class RedisClusterService {
+    constructor(provider) {
+        this.provider = provider;
     }
-    getClient(name) {
+    getCluster(name) {
         if (!name) {
-            name = this.redisClient.defaultKey;
+            name = this.provider.defaultKey;
         }
-        if (!this.redisClient.clients.has(name)) {
-            throw new redis_provider_1.RedisClientError(`client ${name} does not exist`);
+        if (!this.provider.clusters.has(name)) {
+            throw new cluster_provider_1.RedisClusterError(`cluster ${name} does not exist`);
         }
-        return this.redisClient.clients.get(name);
+        return this.provider.clusters.get(name);
     }
-    getClients() {
-        return this.redisClient.clients;
+    getClusters() {
+        return this.provider.clusters;
     }
 };
-RedisService = __decorate([
+RedisClusterService = __decorate([
     common_1.Injectable(),
-    __param(0, common_1.Inject(redis_constants_1.REDIS_CLIENT)),
+    __param(0, common_1.Inject(cluster_constants_1.REDIS_CLUSTER)),
     __metadata("design:paramtypes", [Object])
-], RedisService);
-exports.RedisService = RedisService;
-//# sourceMappingURL=redis.service.js.map
+], RedisClusterService);
+exports.RedisClusterService = RedisClusterService;

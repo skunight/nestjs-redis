@@ -1,0 +1,4 @@
+export const REDIS_CLUSTER_MODULE_OPTIONS = Symbol(
+  'REDIS_CLUSTER_MODULE_OPTIONS',
+);
+export const REDIS_CLUSTER = Symbol('REDIS_CLUSTER');
