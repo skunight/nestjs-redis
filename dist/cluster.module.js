@@ -28,3 +28,4 @@ RedisClusterModule = RedisClusterModule_1 = __decorate([
     common_1.Module({})
 ], RedisClusterModule);
 exports.RedisClusterModule = RedisClusterModule;
+//# sourceMappingURL=cluster.module.js.map

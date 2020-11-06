@@ -20,14 +20,14 @@ let RedisService = class RedisService {
     constructor(redisClient) {
         this.redisClient = redisClient;
     }
-    getClient(name) {
-        if (!name) {
-            name = this.redisClient.defaultKey;
+    getClient(clientName) {
+        if (!clientName) {
+            clientName = this.redisClient.defaultKey;
         }
-        if (!this.redisClient.clients.has(name)) {
-            throw new redis_provider_1.RedisClientError(`client ${name} does not exist`);
+        if (!this.redisClient.clients.has(clientName)) {
+            throw new redis_provider_1.RedisClientError(`client ${clientName} does not exist`);
         }
-        return this.redisClient.clients.get(name);
+        return this.redisClient.clients.get(clientName);
     }
     getClients() {
         return this.redisClient.clients;

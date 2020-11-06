@@ -1,5 +1,5 @@
 import Redis from 'ioredis';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuid } from 'uuid';
 import { Provider } from '@nestjs/common';
 
 import { REDIS_CLIENT, REDIS_MODULE_OPTIONS } from './redis.constants';
@@ -25,7 +25,7 @@ export const createClient = (): Provider => ({
   provide: REDIS_CLIENT,
   useFactory: async (options: RedisModuleOptions | RedisModuleOptions[]): Promise<RedisClient> => {
     const clients = new Map<string, Redis.Redis>();
-    let defaultKey = uuidv4();
+    let defaultKey = uuid();
 
     if (Array.isArray(options)) {
       await Promise.all(

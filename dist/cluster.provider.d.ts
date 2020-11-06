@@ -1,11 +1,11 @@
-import { Redis } from 'ioredis';
+import { Cluster } from 'ioredis';
 import { Provider } from '@nestjs/common';
 import { RedisClusterModuleAsyncOptions, RedisClusterModuleOptions } from './cluster.interface';
 export declare class RedisClusterError extends Error {
 }
 export interface RedisClusterProvider {
     defaultKey: string;
-    clusters: Map<string, Redis>;
+    clusters: Map<string, Cluster>;
     size: number;
 }
 export declare const createCluster: () => Provider;

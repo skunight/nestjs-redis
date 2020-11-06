@@ -70,3 +70,4 @@ ClusterCoreModule = ClusterCoreModule_1 = __decorate([
     __metadata("design:paramtypes", [Object, core_1.ModuleRef])
 ], ClusterCoreModule);
 exports.ClusterCoreModule = ClusterCoreModule;
+//# sourceMappingURL=cluster-core.module.js.map
