@@ -1,3 +1,4 @@
+import type { RedisModuleAsyncOptions, RedisModuleOptions } from './redis.interface';
 import {
   DynamicModule,
   Global,
@@ -6,14 +7,13 @@ import {
   OnModuleDestroy,
 } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
-import { RedisModuleAsyncOptions, RedisModuleOptions } from './redis.interface';
+
+import { REDIS_MODULE_OPTIONS, REDIS_CLIENT } from './redis.constants';
 import {
   createAsyncClientOptions,
   createClient,
   RedisClient,
-} from './redis-client.provider';
-
-import { REDIS_MODULE_OPTIONS, REDIS_CLIENT } from './redis.constants';
+} from './redis.provider';
 import { RedisService } from './redis.service';
 
 @Global()

@@ -1,5 +1,5 @@
+import type { RedisModuleAsyncOptions, RedisModuleOptions } from './redis.interface';
 import { DynamicModule, Module } from '@nestjs/common';
-import { RedisModuleAsyncOptions, RedisModuleOptions } from './redis.interface';
 
 import { RedisCoreModule } from './redis-core.module';
 

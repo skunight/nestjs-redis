@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createAsyncClientOptions = exports.createClient = exports.RedisClientError = void 0;
-const Redis = require("ioredis");
+const ioredis_1 = __importDefault(require("ioredis"));
 const uuid_1 = require("uuid");
 const redis_constants_1 = require("./redis.constants");
 class RedisClientError extends Error {
@@ -9,7 +12,7 @@ class RedisClientError extends Error {
 exports.RedisClientError = RedisClientError;
 async function getClient(options) {
     const { onClientReady, url, ...opt } = options;
-    const client = url ? new Redis(url) : new Redis(opt);
+    const client = url ? new ioredis_1.default(url) : new ioredis_1.default(opt);
     if (onClientReady) {
         onClientReady(client);
     }
@@ -22,16 +25,16 @@ exports.createClient = () => ({
         let defaultKey = uuid_1.v4();
         if (Array.isArray(options)) {
             await Promise.all(options.map(async (o) => {
-                const key = o.name || defaultKey;
+                const key = o.clientName || defaultKey;
                 if (clients.has(key)) {
-                    throw new RedisClientError(`${o.name || 'default'} client is exists`);
+                    throw new RedisClientError(`${o.clientName || 'default'} client is exists`);
                 }
                 clients.set(key, await getClient(o));
             }));
         }
         else {
-            if (options.name && options.name.length !== 0) {
-                defaultKey = options.name;
+            if (options.clientName && options.clientName.length !== 0) {
+                defaultKey = options.clientName;
             }
             clients.set(defaultKey, await getClient(options));
         }
@@ -48,3 +51,4 @@ exports.createAsyncClientOptions = (options) => ({
     useFactory: options.useFactory,
     inject: options.inject,
 });
+//# sourceMappingURL=redis.provider.js.map

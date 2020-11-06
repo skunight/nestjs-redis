@@ -1,18 +1,20 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
-    "target": "ES2018",
+    "module": "commonjs",
+    "target": "es2018",
     "declaration": true,
+    "moduleResolution": "node",
     "noImplicitAny": false,
     "removeComments": true,
     "noLib": false,
+    "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": false,
+    "sourceMap": true,
     "outDir": "./dist",
     "rootDir": "./lib",
     "skipLibCheck": true
   },
-  "include": ["lib/**/*", "../index.ts"],
+  "include": ["lib/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }
