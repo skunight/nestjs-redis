@@ -19,19 +19,19 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "lint": "eslint -c .eslintrc.js"
   },
-  "dependencies": {
-    "@nestjs/common": "^7.4.4",
-    "@nestjs/core": "^7.4.4",
-    "@types/ioredis": "*",
-    "@types/uuid": "*",
-    "ioredis": "^4",
-    "reflect-metadata": "*",
-    "rxjs": "^6",
-    "uuid": "^8"
+  "peerDependencies": {
+    "@nestjs/common": ">=7",
+    "@nestjs/core": ">=7",
+    "ioredis": ">=4",
+    "uuid": ">=8"
   },
   "devDependencies": {
+    "@nestjs/common": "^7",
+    "@nestjs/core": "^7",
     "@nestjs/testing": "^7",
+    "@types/ioredis": "^4.26.6",
     "@types/node": "*",
+    "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^4",
     "@typescript-eslint/parser": "^4",
     "cz-conventional-changelog": "^3",
@@ -39,11 +39,15 @@
     "eslint-config-prettier": "^6",
     "eslint-plugin-jest": "^24",
     "eslint-plugin-prettier": "^3",
+    "ioredis": "^4",
     "jest": "^26",
     "prettier": "^2",
+    "reflect-metadata": "^0.1.13",
     "rimraf": "*",
+    "rxjs": "^6",
     "ts-jest": "^26",
-    "typescript": "^4"
+    "typescript": "^4",
+    "uuid": "^8.3.2"
   },
   "keywords": [
     "nestjs",
