@@ -13,7 +13,7 @@ yarn add nestjs-redis
 
 **NPM**
 ```bash
-npm install nestjs-redis --save
+npm install nestjs-redis
 ```
 
 ### Getting Started
@@ -21,7 +21,7 @@ Let's register the RedisModule in `app.module.ts`
 
 ```typescript
 import { Module } from '@nestjs/common'
-import { RedisModule} from 'nestjs-redis'
+import { RedisModule } from 'nestjs-redis'
 
 @Module({
     imports: [
@@ -33,7 +33,7 @@ export class AppModule {}
 With Async
 ```typescript
 import { Module } from '@nestjs/common';
-import { RedisModule} from 'nestjs-redis'
+import { RedisModule } from 'nestjs-redis'
 
 @Module({
     imports: [
