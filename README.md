@@ -1,7 +1,7 @@
 
 # Nestjs Redis
 
-<div align="center">
+<div>
   <a href="https://www.npmjs.com/package/nestjs-redis">
     <img src="https://img.shields.io/npm/v/nestjs-redis.svg" alt="npm version">
   </a>
