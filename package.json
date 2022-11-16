@@ -1,6 +1,6 @@
 {
   "name": "nestjs-redis",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "a NestJS ioRedis module",
   "author": "skunight",
   "license": "MIT",
@@ -13,7 +13,7 @@
     "precommit": "lint-staged",
     "prepublish": "yarn run build",
     "publish-public": "yarn publish --access public",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:e2e": "jest --config ./test/jest-e2e.json",
