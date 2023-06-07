@@ -14,7 +14,7 @@ export interface RedisClient {
 
 async function getClient(options: RedisModuleOptions): Promise<Redis.Redis> {
   const { onClientReady, url, ...opt } = options;
-  const client = url ? new Redis(url) : new Redis(opt);
+  const client = url ? new Redis.Redis(url) : new Redis.Redis(opt);
   if (onClientReady) {
     onClientReady(client)
   }
