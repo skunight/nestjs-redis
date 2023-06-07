@@ -10,7 +10,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RedisModule = void 0;
 const common_1 = require("@nestjs/common");
 const redis_core_module_1 = require("./redis-core.module");
-let RedisModule = RedisModule_1 = class RedisModule {
+let RedisModule = exports.RedisModule = RedisModule_1 = class RedisModule {
     static register(options) {
         return {
             module: RedisModule_1,
@@ -24,7 +24,6 @@ let RedisModule = RedisModule_1 = class RedisModule {
         };
     }
 };
-RedisModule = RedisModule_1 = __decorate([
-    common_1.Module({})
+exports.RedisModule = RedisModule = RedisModule_1 = __decorate([
+    (0, common_1.Module)({})
 ], RedisModule);
-exports.RedisModule = RedisModule;
