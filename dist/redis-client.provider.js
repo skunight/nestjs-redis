@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createAsyncClientOptions = exports.createClient = exports.RedisClientError = void 0;
-const Redis = require("ioredis");
+const ioredis_1 = require("ioredis");
 const uuid_1 = require("uuid");
 const redis_constants_1 = require("./redis.constants");
 class RedisClientError extends Error {
@@ -9,17 +9,17 @@ class RedisClientError extends Error {
 exports.RedisClientError = RedisClientError;
 async function getClient(options) {
     const { onClientReady, url, ...opt } = options;
-    const client = url ? new Redis(url) : new Redis(opt);
+    const client = url ? new ioredis_1.Redis(url) : new ioredis_1.Redis(opt);
     if (onClientReady) {
         onClientReady(client);
     }
     return client;
 }
-exports.createClient = () => ({
+const createClient = () => ({
     provide: redis_constants_1.REDIS_CLIENT,
     useFactory: async (options) => {
         const clients = new Map();
-        let defaultKey = uuid_1.v4();
+        let defaultKey = (0, uuid_1.v4)();
         if (Array.isArray(options)) {
             await Promise.all(options.map(async (o) => {
                 const key = o.name || defaultKey;
@@ -43,8 +43,10 @@ exports.createClient = () => ({
     },
     inject: [redis_constants_1.REDIS_MODULE_OPTIONS],
 });
-exports.createAsyncClientOptions = (options) => ({
+exports.createClient = createClient;
+const createAsyncClientOptions = (options) => ({
     provide: redis_constants_1.REDIS_MODULE_OPTIONS,
     useFactory: options.useFactory,
     inject: options.inject,
 });
+exports.createAsyncClientOptions = createAsyncClientOptions;

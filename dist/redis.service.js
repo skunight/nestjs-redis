@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const redis_constants_1 = require("./redis.constants");
 const redis_client_provider_1 = require("./redis-client.provider");
 let RedisService = class RedisService {
+    redisClient;
     constructor(redisClient) {
         this.redisClient = redisClient;
     }
@@ -33,9 +34,9 @@ let RedisService = class RedisService {
         return this.redisClient.clients;
     }
 };
-RedisService = __decorate([
-    common_1.Injectable(),
-    __param(0, common_1.Inject(redis_constants_1.REDIS_CLIENT)),
+exports.RedisService = RedisService;
+exports.RedisService = RedisService = __decorate([
+    (0, common_1.Injectable)(),
+    __param(0, (0, common_1.Inject)(redis_constants_1.REDIS_CLIENT)),
     __metadata("design:paramtypes", [Object])
 ], RedisService);
-exports.RedisService = RedisService;
